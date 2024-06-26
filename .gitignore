@@ -4,8 +4,7 @@ results/*
 dist
 students.json
 stats.json
-
-
+.DS_Store
 
 
 
