@@ -1,9 +1,15 @@
 import fs from 'fs';
+import PDFMerger from 'pdf-merger-js'
 
 export type studentType = {
   seatNo: string;
   name: string;
 };
+
+export type statObjType = {
+  "seatNo": String,
+  "success": Boolean
+}
 
 export const studentData: studentType[] = JSON.parse(fs.readFileSync('./students.json', { encoding: 'utf-8' }))
 
@@ -22,5 +28,23 @@ export async function analytics(statsPath: string) {
   return {
     success,
     failed
+  }
+}
+
+export async function mergeAllPDFs(statsData:statObjType[]) {
+  try{
+    const sortedStatsData = statsData.sort((a,b)=>{
+      return a.seatNo.localeCompare(b.seatNo as any)
+    })
+    const pdfMerger = new PDFMerger()
+    for(let i=0;i<sortedStatsData.length;i++){
+      if(sortedStatsData[i].success){
+        await pdfMerger.add(`./results/${sortedStatsData[i].seatNo}.pdf`)
+      }
+    }
+    await pdfMerger.save('merged.pdf')
+    console.log('pdfs merged successfully')
+  } catch(e){
+    console.error('error while merging pdfs',e)
   }
 }
