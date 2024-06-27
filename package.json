@@ -14,7 +14,8 @@
   "description": "",
   "dependencies": {
     "axios": "^1.7.2",
-    "form-data": "^4.0.0"
+    "form-data": "^4.0.0",
+    "pdf-merger-js": "4.3.1"
   },
   "devDependencies": {
     "@types/node": "^20.14.8"
