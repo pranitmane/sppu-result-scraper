@@ -3,12 +3,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; //this is needed to bypass the S
 import axios from 'axios';
 import FormData from 'form-data';
 import fs from 'fs';
-import { studentData, studentType, analytics } from './data'
-
-type statObjType = {
-  "seatNo": String,
-  "success": Boolean
-}
+import { studentData,mergeAllPDFs,analytics, studentType, statObjType} from './data'
 
 async function getResultPDF(SeatNo: String, MotherName: String): Promise<statObjType> {
 
@@ -55,6 +50,7 @@ async function getResultPDFs(students: studentType[]) {
       await new Promise(resolve => setTimeout(resolve, delay));
     }
     const statsArr = await Promise.all(allPromises);
+    await mergeAllPDFs(statsArr)
     await fs.promises.writeFile('./stats.json', JSON.stringify(statsArr))
     console.log(await analytics('./stats.json'))
   } catch (e) {
