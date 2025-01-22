@@ -13,8 +13,8 @@ async function getResultPDF(SeatNo: String, MotherName: String): Promise<statObj
   const form = new FormData();
   form.append('SeatNo', `${SeatNo}`);
   form.append('MotherName', `${MotherName}`);
-  form.append('PatternID', 'GxTZTSYcOVy18dCZIascgA==');
-  form.append('PatternName', '5Zb5Cz8e8AKy7NyhnK8K94Q77OaMLQeVZU9lMMii4t/Dhh/zZNvHEzO8xNeWd8HX');
+  form.append('PatternID', 'm1BNQI1K4Neq+T7ZlFSbDA==');
+  form.append('PatternName', 'yahYElezAOBYysbVmdmCzFpvsbYjuNVYBNDJjg1oBqE=');
 
   try {
     console.log(`Getting result for ${SeatNo}`)
